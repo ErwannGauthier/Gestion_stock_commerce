@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="fenetre" prefHeight="525.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.ClientController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="850.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Mon Compte">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#consulterCompte" text="Mes données" />
+                  <MenuItem mnemonicParsing="false" onAction="#deconnexion" text="Me déconnecter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Mon panier">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#consulterPanier" text="Le consulter" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Catégroies">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreViandesPoissons" text="Viandes &amp; Poissons" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreFruitsLegumes" text="Fruits &amp; Légumes" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreFrais" text="Frais" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreSurgele" text="Surgelé" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreFeculents" text="Féculents" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreConserves" text="Conserves" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreHygiene" text="Hygiène" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreBoissons" text="Boissons" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/viandes_poissons.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonViandesPoissons" layoutX="50.0" layoutY="205.0" mnemonicParsing="false" onAction="#ouvreViandesPoissons" prefHeight="25.0" prefWidth="150.0" text="Viandes &amp; Poissons" wrapText="true" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="250.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/fruits_legumes.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonFruitsLegumes" layoutX="250.0" layoutY="205.0" mnemonicParsing="false" onAction="#ouvreFruitsLegumes" prefHeight="25.0" prefWidth="150.0" text="Fruits &amp; Légumes" wrapText="true" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="450.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/frais.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonFrais" layoutX="450.0" layoutY="205.0" mnemonicParsing="false" onAction="#ouvreFrais" prefHeight="25.0" prefWidth="150.0" text="Frais" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="650.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/surgele.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonSurgele" layoutX="650.0" layoutY="205.0" mnemonicParsing="false" onAction="#ouvreSurgele" prefHeight="25.0" prefWidth="150.0" text="Surgelé" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="50.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/feculents.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonFeculents" layoutX="50.0" layoutY="455.0" mnemonicParsing="false" onAction="#ouvreFeculents" prefHeight="25.0" prefWidth="150.0" text="Féculents" wrapText="true" />
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="250.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/conserves.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="450.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/hygiene.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="650.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/images/iconesCategories/boissons.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="boutonConserves" layoutX="250.0" layoutY="455.0" mnemonicParsing="false" onAction="#ouvreConserves" prefHeight="25.0" prefWidth="150.0" text="Conserves" wrapText="true" />
+      <Button fx:id="boutonHygiene" layoutX="450.0" layoutY="455.0" mnemonicParsing="false" onAction="#ouvreHygiene" prefHeight="25.0" prefWidth="150.0" text="Hygiène" wrapText="true" />
+      <Button fx:id="boutonBoissons" layoutX="650.0" layoutY="455.0" mnemonicParsing="false" onAction="#ouvreBoissons" prefHeight="25.0" prefWidth="150.0" text="Boissons" wrapText="true" />
+   </children>
+</AnchorPane>

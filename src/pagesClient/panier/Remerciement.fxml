@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="100.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.panier.RemerciementController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="80.0" prefWidth="400.0" text="MERCI POUR VOS ACHATS, NOUS ESPERONS VOUS REVOIR BIENTÔT !" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pageAdmin.controlesUtilisateurs.ModifierUtilisateurController">
+   <children>
+      <Label layoutX="50.0" layoutY="20.0" prefHeight="20.0" prefWidth="300.0" text="* Nom d'utilisateur :" />
+      <TextField fx:id="username" layoutX="50.0" layoutY="40.0" prefHeight="20.0" prefWidth="300.0" promptText="Nom d'utilisateur" />
+      <Label layoutX="50.0" layoutY="100.0" prefHeight="20.0" prefWidth="300.0" text="* Mot de passe :" />
+      <Label layoutX="50.0" layoutY="260.0" prefHeight="20.0" prefWidth="300.0" text="* Rôle :" />
+      <ComboBox fx:id="combobox" layoutX="50.0" layoutY="280.0" prefHeight="25.0" prefWidth="300.0" promptText="Admin / Client" />
+      <Label layoutX="50.0" layoutY="340.0" prefHeight="20.0" prefWidth="300.0" text="Points de fidélité :" />
+      <TextField fx:id="pointFidelite" layoutX="50.0" layoutY="360.0" prefHeight="25.0" prefWidth="300.0" promptText="Point fidélité" />
+      <Label fx:id="messageErreur" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="400.0" prefHeight="40.0" prefWidth="300.0" textAlignment="CENTER" textFill="RED" wrapText="true" />
+      <Button fx:id="boutonModifier" layoutX="50.0" layoutY="440.0" mnemonicParsing="false" onAction="#modifierUtilisateur" prefHeight="20.0" prefWidth="300.0" text="Modifier" />
+      <Label layoutX="50.0" layoutY="180.0" prefHeight="20.0" prefWidth="300.0" text="* Vérification du mot de passe :" />
+      <TextField fx:id="mdp" layoutX="50.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" promptText="Mot de passe" />
+      <TextField fx:id="verifMDP" layoutX="50.0" layoutY="200.0" prefHeight="25.0" prefWidth="300.0" promptText="Vérification mot de passe" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.compte.CompteController">
+   <children>
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="50.0" layoutY="20.0" prefHeight="20.0" prefWidth="150.0" text="Nom d'utilisateur :" textAlignment="RIGHT" />
+      <Label fx:id="username" layoutX="220.0" layoutY="20.0" prefHeight="20.0" prefWidth="150.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="50.0" layoutY="80.0" prefHeight="20.0" prefWidth="150.0" text="Mot de passe :" textAlignment="RIGHT" />
+      <Label fx:id="mdp" layoutX="220.0" layoutY="80.0" prefHeight="20.0" prefWidth="150.0" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="50.0" layoutY="140.0" prefHeight="20.0" prefWidth="150.0" text="Points de fidélité :" textAlignment="RIGHT" />
+      <Label fx:id="fidelite" layoutX="220.0" layoutY="140.0" prefHeight="20.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

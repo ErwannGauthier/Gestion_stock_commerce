@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="fenetre" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.categories.produits.ProduitController">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Mon Compte">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#consulterCompte" text="Mes données" />
+                  <MenuItem mnemonicParsing="false" onAction="#deconnexion" text="Me déconnecter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Mon Panier">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#consulterPanier" text="Le consulter" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Catégories">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#ouvrePrincipale" text="Menu principal" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreViandesPoissons" text="Viandes et Poissons" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreFruitsLegumes" text="Fruits et Légumes" />
+              <MenuItem mnemonicParsing="false" onAction="#ouvreFrais" text="Frais" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreSurgele" text="Surgelé" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreFeculents" text="Féculents" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreConserves" text="Conserves" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreHygiene" text="Hygiène" />
+                  <MenuItem mnemonicParsing="false" onAction="#ouvreBoissons" text="Boissons" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nom" layoutX="300.0" layoutY="50.0" prefHeight="40.0" prefWidth="250.0" wrapText="true" />
+      <Label fx:id="marque" layoutX="300.0" layoutY="95.0" prefHeight="20.0" prefWidth="250.0" wrapText="true" />
+      <Label fx:id="poids" layoutX="300.0" layoutY="120.0" prefHeight="20.0" prefWidth="250.0" text="Poids :" wrapText="true" />
+      <Label fx:id="prix" layoutX="300.0" layoutY="145.0" prefHeight="20.0" prefWidth="250.0" text="Prix :" wrapText="true" />
+      <Label fx:id="prixKg" layoutX="300.0" layoutY="170.0" prefHeight="20.0" prefWidth="250.0" text="Prix  au Kg :" wrapText="true" />
+      <Button fx:id="boutonMoins" layoutX="300.0" layoutY="195.0" mnemonicParsing="false" onAction="#boutonMoinsUtilise" prefWidth="75.0" text="-" />
+      <Button fx:id="boutonPlus" layoutX="475.0" layoutY="195.0" mnemonicParsing="false" onAction="#boutonPlusUtilise" prefWidth="75.0" text="+" />
+      <TextField fx:id="quantite" alignment="CENTER" layoutX="375.0" layoutY="195.0" onAction="#verifiePasErreur" prefWidth="100.0" promptText="Quantité" text="1" />
+      <Button fx:id="boutonCommander" layoutX="300.0" layoutY="220.0" mnemonicParsing="false" onAction="#ajouterPanier" prefHeight="25.0" prefWidth="250.0" text="Ajouter au panier" />
+      <Label fx:id="description" alignment="TOP_LEFT" layoutX="50.0" layoutY="275.0" prefHeight="75.0" prefWidth="500.0" text="Description :" wrapText="true" />
+      <Label fx:id="messageConfirmation" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="360.0" prefHeight="20.0" prefWidth="500.0" textAlignment="CENTER" textFill="#00cc00" />
+   </children>
+</AnchorPane>
