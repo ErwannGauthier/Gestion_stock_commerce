@@ -1,14 +1,15 @@
 package pageAccueil;
 
+import dbUtil.tables.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import pagesClient.ClientController;
 import pageInscrire.InscrireController;
 import pageLogin.LoginController;
+import pagesClient.ClientController;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,17 +18,12 @@ public class AccueilController {
 
     @FXML
     private Button boutonConnecter;
-    @FXML
-    private Button boutonInscrire;
-    @FXML
-    private Button boutonContinuer;
 
     @FXML
     private void seConnecter(){
         try{
             // Ferme la fenetre Accueil.
-            Stage stage = (Stage)this.boutonConnecter.getScene().getWindow();
-            stage.close();
+            fermerFenetre();
 
             Stage loginStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -50,8 +46,7 @@ public class AccueilController {
     private void sInscrire(){
         try{
             // Ferme la fenetre Accueil.
-            Stage stage = (Stage)this.boutonInscrire.getScene().getWindow();
-            stage.close();
+            fermerFenetre();
 
             Stage inscrireStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -75,8 +70,7 @@ public class AccueilController {
 
         try{
             // Ferme la fenetre Accueil.
-            Stage stage = (Stage)this.boutonContinuer.getScene().getWindow();
-            stage.close();
+            fermerFenetre();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/pagesClient/client.fxml"));
 
@@ -85,14 +79,20 @@ public class AccueilController {
 
             ClientController clientController = loader.getController();
             // Envoie l'ID du client à la page Client
-            clientController.recupID(0);
+            clientController.init(new Utilisateur(0, "Compte invité", "0", "Client", 0));
 
             stageClient.setTitle("Commerce.io - Accueil Client");
             stageClient.setResizable(false);
             stageClient.show();
         }
-        catch(IOException ex){
+        catch(IOException | SQLException ex){
             ex.printStackTrace();
         }
+    }
+
+    public void fermerFenetre(){
+        // Ferme la fenetre Accueil.
+        Stage stage = (Stage)this.boutonConnecter.getScene().getWindow();
+        stage.close();
     }
 }

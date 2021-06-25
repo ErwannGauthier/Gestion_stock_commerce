@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.AnchorPane?>
 <AnchorPane prefHeight="340.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pageInscrire.InscrireController">
    <children>
       <Label layoutX="50.0" layoutY="20.0" prefHeight="20.0" prefWidth="300.0" text="Nom d'utilisateur :" />

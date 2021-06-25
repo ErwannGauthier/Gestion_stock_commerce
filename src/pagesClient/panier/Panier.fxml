@@ -1,38 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.panier.PanierController">
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<AnchorPane fx:id="fenetre1" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pagesClient.panier.PanierController">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="600.0">
-        <menus>
-          <Menu mnemonicParsing="false" onAction="#consulterCompte" text="Mon Compte">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Mes données" />
-                  <MenuItem mnemonicParsing="false" onAction="#deconnexion" text="Me déconnecter" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Mon Panier">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#consulterPanier" text="Le consulter" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Catégories">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#ouvrePrincipale" text="Menu Principale" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreViandesPoissons" text="Viandes et Poissons" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreFruitsLegumes" text="Fruits et Légumes" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreFrais" text="Frais" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreSurgele" text="Surgelé" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreFeculents" text="Feculents" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreConserves" text="Conserves" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreHygiene" text="Hygiène" />
-                  <MenuItem mnemonicParsing="false" onAction="#ouvreBoissons" text="Boissons" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
       <ScrollPane layoutY="25.0" prefHeight="375.0" prefWidth="600.0">
          <content>
             <Pane fx:id="fenetre" />

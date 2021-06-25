@@ -13,7 +13,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import pageLogin.LoginController;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 
 public class InscrireController{

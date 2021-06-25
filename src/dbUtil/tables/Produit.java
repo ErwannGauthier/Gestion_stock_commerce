@@ -1,4 +1,4 @@
-package pagesClient.categories.produits;
+package dbUtil.tables;
 
 public class Produit {
 

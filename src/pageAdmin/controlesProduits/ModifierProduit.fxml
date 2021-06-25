@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.AnchorPane?>
 <AnchorPane prefHeight="520.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pageAdmin.controlesProduits.ModifierProduitController">
    <children>
       <TextField fx:id="nomProd" layoutX="50.0" layoutY="40.0" prefHeight="20.0" prefWidth="300.0" promptText="Nom" />

@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane prefHeight="480.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pageAdmin.AdminController">
    <children>
       <TabPane prefHeight="480.0" prefWidth="1080.0" tabClosingPolicy="UNAVAILABLE">

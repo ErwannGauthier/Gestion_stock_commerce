@@ -1,6 +1,7 @@
 package pageLogin;
 
 import dbUtil.dbConnection;
+import dbUtil.tables.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import pageAdmin.AdminController;
 import pagesClient.ClientController;
 
@@ -78,8 +78,8 @@ public class LoginController implements Initializable {
             stageClient.setScene(new Scene(loader.load()));
 
             ClientController clientController = loader.getController();
-            // Envoie l'ID du client à la page Client
-            clientController.recupID(getIdUtilisateur());
+            // Envoie le client à la page Client
+            clientController.init(getUtilisateur());
 
             stageClient.setTitle("Commerce.io - Accueil Client");
             stageClient.setResizable(false);
@@ -110,21 +110,21 @@ public class LoginController implements Initializable {
         }
     }
 
-    // Retourne l'ID de l'utilisateur qui se connecte.
-    public int getIdUtilisateur() throws SQLException {
+    // Retourne l'utilisateur qui se connecte.
+    public Utilisateur getUtilisateur() throws SQLException {
 
         Connection conn = dbConnection.getConnection();
         PreparedStatement pr = null;
         ResultSet rs = null;
 
         try{
-            pr = conn.prepareStatement("SELECT userID FROM login where username = ? and role = ?");
+            pr = conn.prepareStatement("SELECT * FROM login where username = ? and role = ?");
             pr.setString(1, this.username.getText());
             pr.setString(2, this.combobox.getValue().toString());
 
             rs = pr.executeQuery();
 
-            return rs.getInt(1);
+            return new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5));
         }
         catch(SQLException ex){
             ex.printStackTrace();
@@ -137,6 +137,6 @@ public class LoginController implements Initializable {
         }
 
         // En cas d'erreur.
-        return -1;
+        return null;
     }
 }

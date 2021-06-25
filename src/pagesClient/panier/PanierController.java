@@ -1,6 +1,8 @@
 package pagesClient.panier;
 
 import dbUtil.dbConnection;
+import dbUtil.tables.Produit;
+import dbUtil.tables.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -10,18 +12,15 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import pageAccueil.AccueilController;
 import pagesClient.ClientController;
-import pagesClient.categories.CategorieController;
-import pagesClient.categories.produits.Produit;
-import pagesClient.compte.CompteController;
+import pagesClient.MenuClient;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Collection;
@@ -32,8 +31,10 @@ public class PanierController {
 
     @FXML
     private Pane fenetre;
+    @FXML
+    private AnchorPane fenetre1;
 
-    private int idClient;
+    private Utilisateur client;
     private int pointFidelite;
     private Collection<Produit> listeProduits;
     private HashMap<Produit, Integer> panier;
@@ -45,17 +46,16 @@ public class PanierController {
     public PanierController() {
     }
 
-    public void initDonnees(int id, Collection<Produit> list, HashMap<Produit, Integer> pan) throws SQLException {
+    public void initDonnees(Utilisateur client, Collection<Produit> list, HashMap<Produit, Integer> pan) throws SQLException {
 
-        this.idClient = id;
+        this.client = client;
         this.listeProduits = list;
         this.panier = pan;
-        if(this.idClient > 0){
-            this.pointFidelite = recupPointFideliteClient();
-        }
-        else{
-            this.pointFidelite = 0;
-        }
+        this.pointFidelite = client.getPointFidelite();
+
+        MenuClient menu = new MenuClient(this.client, this.panier, this.listeProduits);
+        menu.getMenuBar().setPrefWidth(600);
+        this.fenetre1.getChildren().add(menu.getMenuBar());
 
         affichePanier();
     }
@@ -131,7 +131,7 @@ public class PanierController {
 
             this.fenetre.getChildren().addAll(prixTotal, payer);
 
-            if(this.idClient > 0){
+            if(this.client.getId() > 0){
                 this.payerFidel = new CheckBox();
                 this.payerFidel.setLayoutX(posX);
                 this.payerFidel.setLayoutY(posY + 70);
@@ -178,7 +178,7 @@ public class PanierController {
             stage.setScene(new Scene(loader.load()));
 
             PanierController panierController = loader.getController();
-            panierController.initDonnees(this.idClient, this.listeProduits, this.panier);
+            panierController.initDonnees(this.client, this.listeProduits, this.panier);
 
             stage.setTitle("Commerce.io - Panier");
             stage.setResizable(false);
@@ -253,7 +253,7 @@ public class PanierController {
 
             stmt.setInt(1, (int) (this.pointFidelite - payerAvecFidelite() + this.prixTotalCommande/10));
 
-            stmt.setInt(2, this.idClient);
+            stmt.setInt(2, this.client.getId());
 
             // execute la requete
             stmt.execute();
@@ -269,7 +269,7 @@ public class PanierController {
     public void payerCommande(){
 
        retireProduitStock();
-       if(this.idClient > 0) {
+       if(this.client.getId() > 0) {
            ajouteFidelite();
        }
        videPanier();
@@ -303,7 +303,7 @@ public class PanierController {
 
             ClientController clientController = loader.getController();
             // Envoie l'ID du client et le panier à la page Client
-            clientController.recupID(this.idClient);
+            clientController.init(this.client);
 
             stageClient.setTitle("Commerce.io - Accueil Client");
             stageClient.setResizable(false);
@@ -314,35 +314,6 @@ public class PanierController {
         catch(IOException ex){
             ex.printStackTrace();
         }
-    }
-
-    public int recupPointFideliteClient() throws SQLException {
-        Connection conn = dbConnection.getConnection();
-
-        try{
-            // Requête
-            String sql = "SELECT pointFidelite FROM login WHERE userID = ?";
-
-            // Prépare la requête avec des valeurs vides à la place des ? en attendant qu'ils soit remplacés
-            PreparedStatement stmt = conn.prepareStatement(sql);
-
-            stmt.setInt(1, this.idClient);
-
-            // execute la requete
-            ResultSet rs = stmt.executeQuery();
-
-            return rs.getInt(1);
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-
-        finally{
-            // Ferme la connexion à la BDD
-            conn.close();
-        }
-
-        return 0;
     }
 
     public int payerAvecFidelite() throws SQLException {
@@ -372,194 +343,8 @@ public class PanierController {
         return pointUtilise;
     }
 
-    // ------- FONCTIONS POUR MENU -------
-    // MON COMPTE
-    @FXML
-    private void consulterCompte(){
-
-        if(this.idClient > 0){
-            try{
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/pagesClient/compte/Compte.fxml"));
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(loader.load()));
-
-                CompteController compteController = loader.getController();
-                // Envoie l'ID du client dans le CompteController
-                compteController.recupID(this.idClient);
-                compteController.afficheDonnees();
-
-                stage.setTitle("Commerce.io - Mon compte");
-                stage.setResizable(false);
-                stage.show();
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    @FXML
-    private void deconnexion(){
-
-        try{
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pageAccueil/Accueil.fxml"));
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-
-            AccueilController accueilController = loader.getController();
-
-            stage.setTitle("Commerce.io - Accueil");
-            stage.setResizable(false);
-            stage.show();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-
-        fermeFenetre();
-    }
-
-    // MON PANIER
-    @FXML
-    private void consulterPanier(){
-        try{
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pagesClient/panier/Panier.fxml"));
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-
-            PanierController panierController = loader.getController();
-            panierController.initDonnees(this.idClient, this.listeProduits, this.panier);
-
-            stage.setTitle("Commerce.io - Panier");
-            stage.setResizable(false);
-            stage.show();
-        }
-        catch(IOException | SQLException e){
-            e.printStackTrace();
-        }
-
-        fermeFenetre();
-    }
-
-    // CATEGORIES
-    private static final int borneMinViandesPoissons = 10000;
-    private static final int borneMaxViandesPoissons = 20000;
-    private static final int borneMinFruitsLegumes = 20000;
-    private static final int borneMaxFruitsLegumes = 30000;
-    private static final int borneMinFrais = 30000;
-    private static final int borneMaxFrais = 40000;
-    private static final int borneMinSurgele = 40000;
-    private static final int borneMaxSurgele = 50000;
-    private static final int borneMinFeculents = 50000;
-    private static final int borneMaxFeculents = 60000;
-    private static final int borneMinConserves = 60000;
-    private static final int borneMaxConserves = 70000;
-    private static final int borneMinHygiene = 70000;
-    private static final int borneMaxHygiene = 80000;
-    private static final int borneMinBoissons = 80000;
-    private static final int borneMaxBoissons = 90000;
-
-    @FXML
-    public void ouvrePrincipale(){
-
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pagesClient/client.fxml"));
-
-            Stage stageClient = new Stage();
-            stageClient.setScene(new Scene(loader.load()));
-
-            ClientController clientController = loader.getController();
-            // Envoie l'ID du client et le panier à la page Client
-            clientController.recupDonnees(this.idClient, this.panier, this.listeProduits);
-
-            stageClient.setTitle("Commerce.io - Accueil Client");
-            stageClient.setResizable(false);
-            stageClient.show();
-
-            fermeFenetre();
-        }
-        catch(IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void ouvreViandesPoissons(){
-        fenetreGlobale("Viandes et Poissons", borneMinViandesPoissons, borneMaxViandesPoissons);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreFruitsLegumes(){
-        fenetreGlobale("Fruits et Legumes", borneMinFruitsLegumes, borneMaxFruitsLegumes);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreFrais(){
-        fenetreGlobale("Frais", borneMinFrais, borneMaxFrais);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreSurgele(){
-        fenetreGlobale("Surgele", borneMinSurgele, borneMaxSurgele);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreFeculents(){
-        fenetreGlobale("Feculents", borneMinFeculents, borneMaxFeculents);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreConserves(){
-        fenetreGlobale("Conserves", borneMinConserves, borneMaxConserves);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreHygiene(){
-        fenetreGlobale("Hygiene", borneMinHygiene, borneMaxHygiene);
-        fermeFenetre();
-    }
-
-    @FXML
-    public void ouvreBoissons(){
-        fenetreGlobale("Boissons", borneMinBoissons, borneMaxBoissons);
-        fermeFenetre();
-    }
-
-    public void fermeFenetre(){
+    private void fermeFenetre(){
         Stage stage = (Stage) this.fenetre.getScene().getWindow();
         stage.close();
-    }
-
-    public void fenetreGlobale(String nomCat, int borneMin, int borneMax){
-        try{
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pagesClient/categories/Categorie.fxml"));
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loader.load()));
-
-            CategorieController categorieController = loader.getController();
-            // Envoie des données permettant d'identifier la catégorie dans CategorieController
-            categorieController.initDonnees(this.idClient, this.panier, this.listeProduits, nomCat, borneMin, borneMax);
-
-            stage.setTitle("Commerce.io - Catégorie " + nomCat);
-            stage.setResizable(false);
-            stage.show();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
     }
 }
